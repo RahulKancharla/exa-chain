@@ -1,0 +1,32 @@
+pragma solidity ^0.4.24;
+import "browser/inexam.sol";
+contract exam{
+    struct choice{
+        int ans;
+        int n;
+    }
+    mapping (int => choice) public choiceList;
+    inexam e=inexam(0);
+    address public student;
+    function exam(){
+        student=msg.sender;
+    }
+    modifier ifStud{
+        if(student!=msg.sender)
+        throw;
+        _;
+    }
+    function setChoice(int qnumber,int ch)public ifStud{
+        if(qnumber>=e.noq())
+        throw;
+        if(ch>4)
+        throw;
+        choiceList[qnumber].ans=ch;
+        choiceList[qnumber].n=qnumber;
+    }
+    function getChoice(int qn)constant public returns(int){
+        if(qn>=e.noq())
+        throw;
+        return(choiceList[qn].ans);
+    }
+}

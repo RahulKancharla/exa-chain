@@ -1,0 +1,33 @@
+pragma solidity ^0.4.24;
+import "browser/exam.sol";
+import "browser/inexam.sol";
+contract examcorrection{
+    int public cch=0;
+    int private i;
+    string statement;
+    inexam ein=inexam(0);
+    exam edur=exam(0);
+    address receptor;
+    function examcorrection(){
+        receptor=msg.sender;
+    }
+    modifier ifSt{
+        if(edur.student()!=receptor)
+        throw;
+        _;
+    }
+    function getResult() constant public ifSt returns(int){
+        for(i=1;i<ein.Noq();i++){
+            if(edur.getChoice(i)==ein.getAnswer(i))
+            cch++;
+        }
+        return(cch);
+    }
+    function checkChoice(int quesn) constant public ifSt returns(int,int,string){
+        if(edur.getChoice(quesn)==ein.getAnswer(quesn))
+        statement="Correct";
+        else
+        statement="Incorrect";
+        return(edur.getChoice(quesn),ein.getAnswer(quesn),statement);
+    }
+}

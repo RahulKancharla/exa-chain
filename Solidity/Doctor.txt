@@ -1,0 +1,27 @@
+pragma solidity ^0.4.24;
+
+import "browser/patient.sol";
+
+contract doctor{
+
+    patient p1=patient(0x5e72914535f202659083db3a02c984188fa26e9f);
+
+     function checkp(address vadd) constant returns(string){
+
+         if(p1.validatePatient(vadd))
+
+         return "Admitted";
+
+         else
+
+         return "Not Admitted";
+
+     }
+
+     function getpatientDetails(address add) constant public returns(string,string,uint){
+
+         return(p1.getpatientDetails(add));
+
+     }
+
+}

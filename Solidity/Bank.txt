@@ -1,0 +1,62 @@
+pragma solidity ^0.4.24;
+
+contract Bank{
+
+    address client;
+
+    bool _switch = false;
+
+    
+    function Bank() public{
+
+        client = msg.sender;
+
+    }
+
+    modifier ifOwner(){
+
+        if(client!=msg.sender){
+
+            throw;
+
+        }
+
+        _;
+
+    }
+
+    function depositFunds() public payable{
+
+        
+    }
+
+    function withdrawFunds(uint amount) public ifOwner{
+
+        
+        if(client.send(amount)){
+
+            _switch=true;
+
+        }
+
+        else{
+
+            _switch=false;
+
+        }
+
+    }
+
+    function transferFunds(address receiver, uint amount) public ifOwner{
+
+        receiver.send(amount);
+
+    }
+
+    function getFunds() constant public ifOwner returns(uint){
+
+        return this.balance;
+
+    }
+
+}

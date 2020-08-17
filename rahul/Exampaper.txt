@@ -1,0 +1,23 @@
+pragma solidity ^0.4.24;
+contract exampaper{
+
+
+
+string public question1="What is 2*2";
+string public options_question_1="1.Four    2.six";
+
+
+string public question2="What is 3-3";
+
+string public options_question_2="1.zero    2.three";
+
+
+string public question3="what is 4/4";
+
+string public options_question_3="1.five    2.one";
+}
+
+
+
+
+

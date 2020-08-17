@@ -1,0 +1,49 @@
+pragma solidity ^0.4.24;
+contract inexam{
+    struct List{
+    string question;
+    string answer1;
+    string answer2;
+    string answer3;
+    string answer4;
+    int key;
+    int no;
+    }
+    mapping(int => List) public Lists;
+    int public noq=1;
+    address owner;
+    function inexam(){
+        owner=msg.sender;
+    }
+    modifier ifOwner{
+        if(owner!=msg.sender)
+        throw;
+        _;
+    }
+    function addList(string q,string a1,string a2,string a3,string a4,int k) public ifOwner{
+        if(k>4)
+        throw;
+        Lists[noq].question=q;
+        Lists[noq].answer1=a1;
+        Lists[noq].answer2=a2;
+        Lists[noq].answer3=a3;
+        Lists[noq].answer4=a4;
+        Lists[noq].key=k;
+        Lists[noq].no=noq;
+        noq++;
+    }
+    function modifyKey(int qno,int km) public ifOwner{
+        Lists[qno].key=km;
+    }
+    function getList(int qno) constant public ifOwner returns(string,string,string,string,string,int){
+        if(qno>=noq)
+        throw;
+        return(Lists[qno].question,Lists[qno].answer1,Lists[qno].answer2,Lists[qno].answer3,Lists[qno].answer4,Lists[qno].key);
+    }
+    function getAnswer(int qno)public returns(int){
+        return(Lists[qno].key);
+    }
+    function Noq() constant public returns(int){
+        return(noq);
+    }
+}

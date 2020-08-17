@@ -1,0 +1,50 @@
+pragma solidity ^0.4.24;
+import "browser/exampaper.sol";
+contract answer{
+exampaper e1=exampaper(0xbbf289d846208c16edc8474705c748aff07732db);
+
+uint public a;
+uint public b;
+uint public c;
+uint public k=0; 
+
+function a_your_answer(uint x) public{
+a=x;
+}
+function b_your_answer(uint y) public{
+b=y;
+ }
+
+function c_your_answer(uint z) public{
+c=z;
+
+ }
+function update_a_answer(uint x)public{
+a=x;
+}
+function update_b_answer(uint y)public{
+b=y;
+}
+function update_c_answer(uint z)public{
+c=z;
+}
+function submit() public{
+    if(a==1)
+    ++k;
+    if(b==1)
+    ++k;
+    if(c==2)
+    ++k;
+}
+function result() public constant returns(uint){
+return (k);
+}
+
+}
+
+
+
+
+
+
+

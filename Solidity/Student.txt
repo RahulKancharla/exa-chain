@@ -1,0 +1,83 @@
+pragma solidity ^0.4.24;
+
+contract studentDetails{
+
+    struct student{
+
+        string name;
+
+        uint age;
+
+        string qualification;
+
+        string college;
+
+        address add;
+
+    }
+
+    address owner;
+
+    mapping(address => student) students;
+
+    function studentDetails() public{
+
+        owner=msg.sender;
+
+    }
+
+    modifier ifOwner(){
+
+        if(owner!=msg.sender){
+
+            throw;
+
+        }
+
+        _;
+
+    }
+
+    function insertDetails(string _name,uint _age,string _qualification,string _college) public ifOwner{
+
+        students[msg.sender].add=msg.sender;
+
+        students[msg.sender].name=_name;
+
+        students[msg.sender].age=_age;
+
+        students[msg.sender].qualification=_qualification;
+
+        students[msg.sender].college=_college;
+
+    }
+
+    function updateAge(uint _age) public ifOwner{
+
+        students[msg.sender].age=_age;
+
+    }
+
+    function getstudentDetails(address sadd) public constant returns(string,uint,string,string){
+
+        return(students[sadd].name,students[sadd].age,students[sadd].qualification,students[sadd].college);
+
+    }
+
+    function validateStudent(address vadd) public constant returns(bool){
+
+        if(students[vadd].add==vadd){
+
+            return true;
+ 
+        }
+
+        else{
+
+            return false;
+
+        }
+
+    }
+
+}

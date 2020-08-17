@@ -1,0 +1,28 @@
+pragma solidity ^0.4.24;
+
+import "browser/stud.sol";
+
+contract employee{
+
+    studentDetails s1=studentDetails(0x5e72914535f202659083db3a02c984188fa26e9f);
+
+    
+    function check(address vadd) constant returns(string){
+
+        if(s1.validateStudent(vadd))
+
+        return "Valid";
+
+        else
+
+        return "Invalid";
+
+    }
+
+    function getstudentDetails(address sadd) constant public returns(string,uint,string,string){
+
+        return(s1.getstudentDetails(sadd));
+
+    }
+
+}

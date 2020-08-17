@@ -1,0 +1,63 @@
+pragma solidity ^0.4.24;
+
+contract patient{
+
+    struct pat{
+
+        string name;
+ 
+       string illness;
+
+        uint fee;
+
+        address add;
+
+    }
+
+    address staff;
+
+    mapping(address => pat) patients;
+
+    function patient() public{
+
+        staff=msg.sender;
+
+    }
+
+    modifier ifStaff(){
+
+        if(staff!=msg.sender){
+
+        throw;
+
+        }
+
+        _;
+
+    }
+
+    function insertDetails(string _name,string _illness,uint _fee,address _add) public{
+
+        patients[_add].add=_add;
+
+        patients[_add].name=_name;
+
+        patients[_add].illness=_illness;
+
+        patients[_add].fee=_fee;
+
+    }
+
+    function updateFees(address _add,uint amount) public ifStaff{
+
+        patients[_add].fee=amount;
+
+    }
+
+    function getpatientDetails(address _add) public constant returns(string,string,uint){
+
+        return(patients[_add].name,patients[_add].illness,patients[_add].fee);
+
+    }
+
+}
